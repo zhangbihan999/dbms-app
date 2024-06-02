@@ -96,7 +96,7 @@ export default function Home() {
 
             <div>
                 <label htmlFor="admin-authority-code" className="block text-sm font-medium leading-6 text-gray-900">Authority Code</label>
-                <label className="block text-xs font-medium leading-6 text-gray-500">Tip: Only needed for &aposAdmin&apos account</label>
+                <label className="block text-xs font-medium leading-6 text-gray-500">Tip: Only needed for &apos;Admin&apos; account</label>
               <div className="mt-2">
                 <input id="admin-authority-code" name="admin-authority-code" type="password" autoComplete="admin-authority-code" required  disabled={mode !== 'Admin'} onChange={(e) => setAuthorityCode(e.target.value)} className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"/>
               </div>
