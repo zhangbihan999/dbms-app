@@ -28,6 +28,7 @@ export default function Home() {
   const [books, setBooks] = useState<Book[]>([])
   const [orders, setOrders] = useState<Order[]>([])
   const [showForm, setShowForm] = useState(false);
+  const [updateTrigger, setUpdateTrigger] = useState(false);
   const [currentBook, setCurrentBook] = useState({ id: 0, name: '', borrowDate: new Date(), dueDate: new Date() });
 
   const { user, logout } = useUserStore()   /* 用户状态 */
@@ -66,7 +67,7 @@ export default function Home() {
   useEffect(() => {
     fetchBooks();
     fetchOrders()
-  }, []);
+  }, [updateTrigger]);   // 依赖于 updateTrigger，每当它变化时重新获取数据
 
   /* 从数据库中获取 book 表单的内容 */
   async function fetchBooks() {
@@ -142,6 +143,7 @@ export default function Home() {
         console.log('Data inserted: ', data);
         alert("Successfully borrowed! Remember to return it in time!");
         closeForm()
+        setUpdateTrigger(!updateTrigger);  // 更新触发状态，以便重新获取数据
     }
   }
 
@@ -151,6 +153,10 @@ export default function Home() {
         .from('book') 
         .update({ status: false })
         .eq('id', currentBook.id);
+    
+    if (!error) {
+      fetchBooks();  // 确保成功更新后重新获取数据
+    }
   }
 
   return (
